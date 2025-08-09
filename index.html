@@ -63,7 +63,7 @@
         <input id="subject" maxlength="80" name="subject" size="20" type="text" />
 
         <label for="description">Description</label>
-        <textarea name="description"></textarea>
+        <textarea id="description" name="description"></textarea>
 
         <label for="reason">Case Reason</label>
         <select id="reason" name="reason">
@@ -102,22 +102,21 @@
 </div>
 
 <script>
-    // Function to get URL parameters and fill form
-    (function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        for (const [key, value] of urlParams) {
-            const field = document.querySelector(`[name="${key}"]`);
-            if (field) {
-                if (field.tagName === "SELECT") {
-                    field.value = value;
-                } else if (field.tagName === "TEXTAREA" || field.tagName === "INPUT") {
-                    field.value = decodeURIComponent(value);
-                }
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.forEach((value, key) => {
+        const field = document.querySelector(`[name="${key}"]`);
+        if (field) {
+            if (field.tagName === "SELECT") {
+                const option = Array.from(field.options).find(opt => opt.value === value);
+                if (option) field.value = value;
+            } else if (field.tagName === "TEXTAREA" || field.tagName === "INPUT") {
+                field.value = decodeURIComponent(value);
             }
         }
-    })();
+    });
+})();
 </script>
 
 </body>
 </html>
-
