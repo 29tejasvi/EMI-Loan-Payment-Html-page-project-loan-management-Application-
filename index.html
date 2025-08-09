@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bharat Fin Corp - Web to Case</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f9ff;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        border-top: 6px solid #007BFF;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        color: #007BFF;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+    input[type="submit"] {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Bharat Fin Corp</h2>
+
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000008CjrB" method="POST">
+
+        <input type="hidden" name="orgid" value="00DgK000008CjrB">
+        <input type="hidden" name="retURL" value="http://www.google.com">
+
+        <label for="subject">Subject</label>
+        <input id="subject" maxlength="80" name="subject" size="20" type="text" />
+
+        <label for="description">Description</label>
+        <textarea name="description"></textarea>
+
+        <label for="reason">Case Reason</label>
+        <select id="reason" name="reason">
+            <option value="">--None--</option>
+            <option value="Installation">Installation</option>
+            <option value="Equipment Complexity">Equipment Complexity</option>
+            <option value="Performance">Performance</option>
+            <option value="Breakdown">Breakdown</option>
+            <option value="Equipment Design">Equipment Design</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Other">Other</option>
+            <option value="EMI Payment">EMI Payment</option>
+        </select>
+
+        <label for="status">Status</label>
+        <select id="status" name="status">
+            <option value="">--None--</option>
+            <option value="New">New</option>
+            <option value="Working">Working</option>
+            <option value="Escalated">Escalated</option>
+            <option value="Closed">Closed</option>
+        </select>
+
+        <label for="00NgK00001A1CLp">Payment Method</label>
+        <select id="00NgK00001A1CLp" name="00NgK00001A1CLp" title="Payment Method">
+            <option value="">--None--</option>
+            <option value="Web">Web</option>
+            <option value="In-Branch">In-Branch</option>
+        </select>
+
+        <label for="00NgK00001A4kcH">Loan Application Id</label>
+        <input id="00NgK00001A4kcH" maxlength="18" name="00NgK00001A4kcH" size="20" type="text" />
+
+        <input type="submit" name="submit" value="Submit Case">
+    </form>
+</div>
+
+<script>
+    // Function to get URL parameters and fill form
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        for (const [key, value] of urlParams) {
+            const field = document.querySelector(`[name="${key}"]`);
+            if (field) {
+                if (field.tagName === "SELECT") {
+                    field.value = value;
+                } else if (field.tagName === "TEXTAREA" || field.tagName === "INPUT") {
+                    field.value = decodeURIComponent(value);
+                }
+            }
+        }
+    })();
+</script>
+
+</body>
+</html>
